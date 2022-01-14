@@ -1,4 +1,4 @@
-package com.harman.imageprocessing
+package com.harman.imageprocessingmvvm
 
 import org.junit.Test
 
