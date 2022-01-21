@@ -36,12 +36,24 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageSave"
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:src="@drawable/ic_done"
-            android:tint="@color/white" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageSave"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:src="@drawable/ic_done"
+                android:tint="@color/white" />
+
+            <ProgressBar
+                android:id="@+id/savingProgressBar"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:visibility="gone" />
+            
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -87,6 +99,6 @@
         app:layout_constraintBottom_toBottomOf="@id/filterRecyclerView"
         app:layout_constraintEnd_toEndOf="@id/filterRecyclerView"
         app:layout_constraintStart_toStartOf="@id/filterRecyclerView"
-        app:layout_constraintTop_toTopOf="@id/filterRecyclerView"/>
+        app:layout_constraintTop_toTopOf="@id/filterRecyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
