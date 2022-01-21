@@ -14,7 +14,9 @@
         android:layout_height="@dimen/_70sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/image_place_holder"
-        app:riv_corner_radius="@dimen/_8sdp"/>
+        app:riv_corner_radius="@dimen/_4sdp"
+        android:background="@color/white"
+        android:padding="@dimen/_1sdp"/>
 
     <TextView
         android:id="@+id/textFilterName"
