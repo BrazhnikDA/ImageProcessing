@@ -1,20 +1,8 @@
 <resources>
-    <string name="app_name">ImageProcessing</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Next</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="get_access_media">"Кажется вы у нас впервые, нам потребуется доступ к вашей галерее, если вы согласны нажмите кнопочку ниже"</string>
-    <string name="button_get_access_media">Согласен!</string>
-    <!--Надписи для кнопок действия-->
-   <string name="button_filter">Фильтры</string>
-   <string name="button_mirror">Зеркало</string>
-   <string name="button_blur">Размытие</string>
-   <string name="button_text">Текст</string>
-   <string name="button_cut">Обрезать</string>
+    <string name="app_name">ImageProcessingMVVM</string>
+    <string name="saved_images">Saved image</string>
+    <string name="edit_new_image">Edit New Image</string>
+    <string name="let_s_create_something_new">Let\'s create something new!</string>
+    <string name="image_filters">Image Filters</string>
+    <string name="apply_filter">Apply Filter</string>
 </resources>
