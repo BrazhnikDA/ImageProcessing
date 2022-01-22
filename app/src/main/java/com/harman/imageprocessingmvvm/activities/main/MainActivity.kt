@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import com.harman.imageprocessingmvvm.activities.editimage.EditImageActivity
+import com.harman.imageprocessingmvvm.activities.savedimages.SavedImagesActivity
 import com.harman.imageprocessingmvvm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +31,11 @@ class MainActivity : AppCompatActivity() {
             ).also { pickerIntent ->
                 pickerIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 startActivityForResult(pickerIntent, REQUEST_CODE_PICK_IMAGE)
+            }
+        }
+        binding.buttonViewSavedImages.setOnClickListener {
+            Intent(applicationContext, SavedImagesActivity::class.java).also {
+                startActivity(it)
             }
         }
     }

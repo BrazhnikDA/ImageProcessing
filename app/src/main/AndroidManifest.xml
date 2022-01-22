@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImageProcessingMVVM">
         <activity
+            android:name=".activities.savedimages.SavedImagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.filteredimage.FilteredImageActivity"
             android:exported="false" />
         <activity
