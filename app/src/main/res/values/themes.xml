@@ -18,4 +18,11 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+    <style name="Theme.ImageProcessingMVVM.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.ImageProcessingMVVM.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.ImageProcessingMVVM.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
