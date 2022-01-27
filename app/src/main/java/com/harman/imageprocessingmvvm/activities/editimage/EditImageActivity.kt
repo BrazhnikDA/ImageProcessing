@@ -2,11 +2,18 @@ package com.harman.imageprocessingmvvm.activities.editimage
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import com.harman.imageprocessingmvvm.R
 import com.harman.imageprocessingmvvm.activities.filteredimage.FilteredImageActivity
 import com.harman.imageprocessingmvvm.activities.main.MainActivity
 import com.harman.imageprocessingmvvm.adapters.ImageFiltersAdapter
@@ -40,6 +47,15 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         setListeners()
         setupObservers()
         prepareImagePreview()
+        binding.filterRecyclerView.visibility = View.GONE
+
+        // Menu
+        binding.imageMenu.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+        binding.navigationView.itemIconTintList = null
+        val navController: NavController = Navigation.findNavController(this, R.id.navHostFragment)
+        NavigationUI.setupWithNavController(binding.navigationView, navController)
     }
 
     private fun setupObservers() {
@@ -78,6 +94,7 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             }
         })
         filteredBitmap.observe(this, { bitmap ->
+            //binding.imagePreview.setImageBitmap(bitmap)
             binding.imagePreview.setImageBitmap(bitmap)
         })
         viewModel.saveFilteredImageUiState.observe(this, {
@@ -113,7 +130,7 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
     }
 
     private fun setListeners() {
-        binding.imageBack.setOnClickListener() {
+        binding.imageBack.setOnClickListener {
             onBackPressed()
         }
         binding.imageSave.setOnClickListener {
@@ -122,16 +139,28 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             }
         }
 
+        binding.buttonFilter.setOnClickListener {
+            if (binding.filterRecyclerView.visibility == View.GONE) {
+                binding.filterRecyclerView.visibility = View.VISIBLE
+                binding.buttonFilter.setTextColor(Color.BLACK)
+            }
+        }
+
+
+
         /*
         This will show original image when we long click ImageView until we release click,
         So that we can see difference between original image and filtered image
          */
         binding.imagePreview.setOnLongClickListener {
+            //binding.imagePreview.setImageBitmap(originalBitmap)
             binding.imagePreview.setImageBitmap(originalBitmap)
             return@setOnLongClickListener false
         }
         binding.imagePreview.setOnClickListener {
-            binding.imagePreview.setImageBitmap(filteredBitmap.value)
+            filteredBitmap.value?.let { value ->
+                binding.imagePreview.setImageBitmap(value)
+            }
         }
     }
 
