@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 31
 
@@ -64,4 +66,6 @@ dependencies {
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
+    // Firebase
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
 }
