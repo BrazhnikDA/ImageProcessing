@@ -8,12 +8,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.harman.imageprocessingmvvm.R
 import com.harman.imageprocessingmvvm.activities.filteredimage.FilteredImageActivity
 import com.harman.imageprocessingmvvm.activities.main.MainActivity
 import com.harman.imageprocessingmvvm.adapters.ImageFiltersAdapter
@@ -26,11 +24,15 @@ import com.harman.imageprocessingmvvm.viewmodels.EditImageViewModel
 import jp.co.cyberagent.android.gpuimage.GPUImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class EditImageActivity : AppCompatActivity(), ImageFilterListener {
 
     companion object {
         const val KEY_FILTERED_IMAGE_URI = "filtered"
     }
+
+    // Name user
+    private var textName: String = ""
 
     private lateinit var binding: ActivityEditImageBinding
     private val viewModel: EditImageViewModel by viewModel()
@@ -46,15 +48,27 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         setContentView(binding.root)
         setListeners()
         setupObservers()
+        setupObserversBlur()
+
         prepareImagePreview()
         binding.filterRecyclerView.visibility = View.GONE
+        binding.filterBlurRecyclerView.visibility = View.GONE
+
+        /*// Get name user
+        textName = {
+            (intent.getStringExtra("name")).toString()
+        }.toString()
+
+        // Получить доступ имени в меню
+        val res: Resources = resources
+        String.format(res.getString(com.harman.imageprocessingmvvm.R.string.nameUser), textName)*/
 
         // Menu
         binding.imageMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
         binding.navigationView.itemIconTintList = null
-        val navController: NavController = Navigation.findNavController(this, R.id.navHostFragment)
+        val navController: NavController = Navigation.findNavController(this, com.harman.imageprocessingmvvm.R.id.navHostFragment)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
     }
 
@@ -62,7 +76,7 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         viewModel.imagePreviewUiState.observe(this, {
             val dataState = it ?: return@observe
             binding.previewProgressBar.visibility =
-                if (dataState.isLoading) View.VISIBLE else View.GONE
+                if (dataState.isLoading) View.GONE else View.GONE
             dataState.bitmap?.let { bitmap ->
                 // For the first time 'filtered image = original image'
                 originalBitmap = bitmap
@@ -82,10 +96,73 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         viewModel.imageFiltersUiState.observe(this, {
             val imageFiltersDataState = it ?: return@observe
             binding.imageFiltersProgressBar.visibility =
-                if (imageFiltersDataState.isLoading) View.VISIBLE else View.GONE
+                if (imageFiltersDataState.isLoading) View.GONE else View.GONE
             imageFiltersDataState.imageFilters?.let { imageFilters ->
                 ImageFiltersAdapter(imageFilters, this).also { adapter ->
                     binding.filterRecyclerView.adapter = adapter
+                }
+            } ?: kotlin.run {
+                imageFiltersDataState.error?.let { error ->
+                    displayToast(error)
+                }
+            }
+        })
+        filteredBitmap.observe(this, { bitmap ->
+            binding.imagePreview.setImageBitmap(bitmap)
+        })
+        viewModel.saveFilteredImageUiState.observe(this, {
+            val saveFilteredImageDataState = it ?: return@observe
+           /* if (saveFilteredImageDataState.isLoading) {
+                binding.imageSave.visibility = View.GONE
+                binding.savingProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.savingProgressBar.visibility = View.GONE
+                binding.imageSave.visibility = View.VISIBLE
+            }*/
+            saveFilteredImageDataState.uri?.let { savedImageUri ->
+                Intent(
+                    applicationContext,
+                    FilteredImageActivity::class.java
+                ).also { filteredImageIntent ->
+                    filteredImageIntent.putExtra(KEY_FILTERED_IMAGE_URI, savedImageUri)
+                    startActivity(filteredImageIntent)
+                }
+            } ?: kotlin.run {
+                saveFilteredImageDataState.error?.let { error ->
+                    displayToast(error)
+                }
+            }
+        })
+    }
+
+    private fun setupObserversBlur() {
+        viewModel.imagePreviewUiState.observe(this, {
+            val dataState = it ?: return@observe
+            binding.previewProgressBar.visibility =
+                if (dataState.isLoading) View.GONE else View.GONE
+            dataState.bitmap?.let { bitmap ->
+                // For the first time 'filtered image = original image'
+                originalBitmap = bitmap
+                filteredBitmap.value = bitmap
+
+                with(originalBitmap) {
+                    gpuImage.setImage(this)
+                    binding.imagePreview.show()
+                    viewModel.loadImageFiltersBlur(this)
+                }
+            } ?: kotlin.run {
+                dataState.error?.let { error ->
+                    displayToast(error)
+                }
+            }
+        })
+        viewModel.imageFiltersUiState.observe(this, {
+            val imageFiltersDataState = it ?: return@observe
+            binding.imageFiltersBlurProgressBar.visibility =
+                if (imageFiltersDataState.isLoading) View.GONE else View.GONE
+            imageFiltersDataState.imageFilters?.let { imageFilters ->
+                ImageFiltersAdapter(imageFilters, this).also { adapter ->
+                    binding.filterBlurRecyclerView.adapter = adapter
                 }
             } ?: kotlin.run {
                 imageFiltersDataState.error?.let { error ->
@@ -99,13 +176,13 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         })
         viewModel.saveFilteredImageUiState.observe(this, {
             val saveFilteredImageDataState = it ?: return@observe
-            if (saveFilteredImageDataState.isLoading) {
+            /*if (saveFilteredImageDataState.isLoading) {
                 binding.imageSave.visibility = View.GONE
                 binding.savingProgressBar.visibility = View.VISIBLE
             } else {
                 binding.savingProgressBar.visibility = View.GONE
                 binding.imageSave.visibility = View.VISIBLE
-            }
+            }*/
             saveFilteredImageDataState.uri?.let { savedImageUri ->
                 Intent(
                     applicationContext,
@@ -140,13 +217,30 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         }
 
         binding.buttonFilter.setOnClickListener {
+            if (binding.filterBlurRecyclerView.visibility == View.VISIBLE) {
+                binding.filterBlurRecyclerView.visibility = View.GONE
+                binding.buttonBlur.setTextColor(Color.WHITE)
+            }
+
             if (binding.filterRecyclerView.visibility == View.GONE) {
                 binding.filterRecyclerView.visibility = View.VISIBLE
                 binding.buttonFilter.setTextColor(Color.BLACK)
+                setupObservers()
             }
         }
 
+        binding.buttonBlur.setOnClickListener {
+            if (binding.filterRecyclerView.visibility == View.VISIBLE) {
+                binding.filterRecyclerView.visibility = View.GONE
+                binding.buttonFilter.setTextColor(Color.WHITE)
+            }
 
+            if (binding.filterBlurRecyclerView.visibility == View.GONE) {
+                binding.filterBlurRecyclerView.visibility = View.VISIBLE
+                binding.buttonBlur.setTextColor(Color.BLACK)
+                setupObserversBlur()
+            }
+        }
 
         /*
         This will show original image when we long click ImageView until we release click,

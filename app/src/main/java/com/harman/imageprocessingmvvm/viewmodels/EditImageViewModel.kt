@@ -65,6 +65,19 @@ class EditImageViewModel(private val editImageRepository: EditImageRepository) :
         }
     }
 
+    fun loadImageFiltersBlur(originalImage: Bitmap) {
+        Coroutines.io {
+            kotlin.runCatching {
+                editImageFiltersUiState(isLoading = true)
+                editImageRepository.getImageFiltersBlur(getPreviewImage(originalImage))
+            }.onSuccess { imageFilters ->
+                editImageFiltersUiState(imageFilters = imageFilters)
+            }.onFailure {
+                editImageFiltersUiState(error = it.message.toString())
+            }
+        }
+    }
+
     private fun getPreviewImage(originalImage: Bitmap): Bitmap {
         return runCatching {
             val previewWidth = 150
