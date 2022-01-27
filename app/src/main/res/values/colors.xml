@@ -2,7 +2,7 @@
 <resources>
     <color name="primary">#77A7EF</color>
     <color name="primaryDark">#498AEA</color>
-    <color name="selectedFilter">#00ff00</color>
+    <color name="selectedFilter">#AAECAA</color>
     <color name="secondary">#FEEAA5</color>
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#757575</color>
@@ -12,4 +12,8 @@
     <color name="buttonEditNewImages">#FFB74D</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
 </resources>
