@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.harman.imageprocessingmvvm" >
+    package="com.harman.imageprocessingmvvm">
 
     <application
         android:name=".utilities.AppConfig"
@@ -9,17 +9,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ImageProcessingMVVM" >
+        android:theme="@style/Theme.ImageProcessingMVVM">
         <activity
-            android:name=".menu"
+            android:name=".VerifyOTPActivity"
             android:exported="false"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.ImageProcessingMVVM.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.ImageProcessingMVVM.NoActionBar" />
+            android:name=".SendOTPActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activities.savedimages.SavedImagesActivity"
             android:exported="false" />
@@ -29,22 +36,17 @@
         <activity
             android:name=".activities.editimage.EditImageActivity"
             android:exported="false" />
+
         <activity
             android:name=".activities.main.MainActivity"
-            android:exported="true"
-            android:theme="@style/FullScreen" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:theme="@style/FullScreen"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_path" />
