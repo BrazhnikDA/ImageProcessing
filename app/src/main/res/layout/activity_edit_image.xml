@@ -106,7 +106,7 @@
                     android:text="@string/button_blur" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/buttonText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
@@ -114,7 +114,7 @@
                     android:text="@string/button_text" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/buttonCut"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="5dp"
@@ -122,7 +122,7 @@
                     android:text="@string/button_cut" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/buttonMirror"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -167,6 +167,33 @@
 
         <ProgressBar
             android:id="@+id/imageFiltersProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/filterRecyclerView"
+            app:layout_constraintEnd_toEndOf="@id/filterRecyclerView"
+            app:layout_constraintStart_toStartOf="@id/filterRecyclerView"
+            app:layout_constraintTop_toTopOf="@id/filterRecyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/filterBlurRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_105sdp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/scroll"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/item_container_filter" />
+
+        <ProgressBar
+            android:id="@+id/imageFiltersBlurProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
