@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -8,29 +8,6 @@
     android:layout_marginStart="@dimen/_8sdp"
     android:layout_marginLeft="@dimen/_8sdp"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textModeName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:ellipsize="end"
-        android:fontFamily="@font/poppins_regular"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:maxLines="1"
-        android:textColor="@color/primaryText"
-        android:textSize="@dimen/_12ssp"
-        tools:text="Mode 1" />-->
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:orientation="vertical">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imageFilterPreview"
@@ -56,7 +33,4 @@
             android:textSize="@dimen/_12ssp"
             tools:text="Filter 1" />
 
-
-    </LinearLayout>
-<!--
-</LinearLayout>-->
+</LinearLayout>
