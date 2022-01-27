@@ -25,10 +25,11 @@
         app:layout_constraintTop_toTopOf="@+id/imageProfile" />
 
     <TextView
+        android:id="@+id/menuNameUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="Dima Brazh"
+        android:text="@string/nameUser"
         android:textColor="@color/primaryText"
         android:textSize="18sp"
         android:textStyle="bold"
