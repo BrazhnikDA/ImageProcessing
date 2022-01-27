@@ -1,19 +1,22 @@
 package com.harman.imageprocessingmvvm.activities.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import androidx.appcompat.app.AppCompatActivity
 import com.harman.imageprocessingmvvm.activities.editimage.EditImageActivity
 import com.harman.imageprocessingmvvm.activities.savedimages.SavedImagesActivity
 import com.harman.imageprocessingmvvm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // To take an image
     companion object {
         private const val REQUEST_CODE_PICK_IMAGE = 1
         const val KEY_IMAGE_URI = "imageUri"
     }
+
+    // Bind the activity screen "activity_main"
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +26,10 @@ class MainActivity : AppCompatActivity() {
         setListeners()
     }
 
+    // Listener of button clicks
     private fun setListeners() {
-        binding.buttonEditNewImage.setOnClickListener(){
+        // Take new image in gallery
+        binding.buttonEditNewImage.setOnClickListener() {
             Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -33,18 +38,26 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(pickerIntent, REQUEST_CODE_PICK_IMAGE)
             }
         }
+        // Viewing saved images
         binding.buttonViewSavedImages.setOnClickListener {
-            Intent(applicationContext, SavedImagesActivity::class.java).also {
-                startActivity(it)
-            }
+            startActivity(
+                Intent(
+                    applicationContext,
+                    SavedImagesActivity::class.java
+                )
+            )
         }
     }
 
+    // Transmitting the image address between activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK) {
             data?.data?.let { imageUri ->
-                Intent(applicationContext, EditImageActivity::class.java).also { editImageIntent ->
+                Intent(
+                    applicationContext,
+                    EditImageActivity::class.java
+                ).also { editImageIntent ->
                     editImageIntent.putExtra(KEY_IMAGE_URI, imageUri)
                     startActivity(editImageIntent)
                 }

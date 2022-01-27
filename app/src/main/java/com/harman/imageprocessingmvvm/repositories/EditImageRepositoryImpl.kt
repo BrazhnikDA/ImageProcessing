@@ -12,7 +12,6 @@ import jp.co.cyberagent.android.gpuimage.filter.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
-import java.lang.Exception
 
 class EditImageRepositoryImpl(private val context: Context) : EditImageRepository {
     override suspend fun prepareImagePreview(imageUri: Uri): Bitmap? {
@@ -33,7 +32,7 @@ class EditImageRepositoryImpl(private val context: Context) : EditImageRepositor
         //region:: Image Filters
 
         // Normal
-        val also = GPUImageFilter().also { filter ->
+        GPUImageFilter().also { filter ->
             gpuImage.setFilter(filter)
             imageFilters.add(
                 ImageFilter(
