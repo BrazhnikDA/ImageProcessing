@@ -20,7 +20,7 @@
             android:id="@+id/imageBack"
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/ic_back_original"
             android:tint="@color/white" />
 
         <TextView
