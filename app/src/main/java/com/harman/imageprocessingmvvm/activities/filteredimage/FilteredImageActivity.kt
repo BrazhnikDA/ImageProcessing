@@ -2,9 +2,8 @@ package com.harman.imageprocessingmvvm.activities.filteredimage
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.harman.imageprocessingmvvm.R
+import androidx.appcompat.app.AppCompatActivity
 import com.harman.imageprocessingmvvm.activities.editimage.EditImageActivity
 import com.harman.imageprocessingmvvm.databinding.ActivityFilteredImageBinding
 
