@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "856732428360",
+    "project_id": "image-processing-ab24c",
+    "storage_bucket": "image-processing-ab24c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856732428360:android:7b7de7b465816bffce507d",
+        "android_client_info": {
+          "package_name": "com.harman.imageprocessingmvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856732428360-a3p8cr6rfvjbj069r1vr82o51588j9vm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harman.imageprocessingmvvm",
+            "certificate_hash": "0c635daa01027f56d9b745737f0d1abc5a17cefb"
+          }
+        },
+        {
+          "client_id": "856732428360-7u869qi1ba1l3opilbbq4l44h08ntc45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnwcFbrpkJB5l_tCH6b-aLC6oIzErZ7iI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856732428360-7u869qi1ba1l3opilbbq4l44h08ntc45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -18,21 +18,21 @@ class EditImageViewModel(private val editImageRepository: EditImageRepository) :
     fun prepareImagePreview(imageUri: Uri) {
         Coroutines.io {
             runCatching {
-                emitImagePreviewUiState(isLoading = true)
+                editImagePreviewUiState(isLoading = true)
                 editImageRepository.prepareImagePreview(imageUri)
             }.onSuccess { bitmap ->
                 if (bitmap != null) {
-                    emitImagePreviewUiState(bitmap = bitmap)
+                    editImagePreviewUiState(bitmap = bitmap)
                 } else {
-                    emitImagePreviewUiState(error = "Unable to prepare image preview")
+                    editImagePreviewUiState(error = "Unable to prepare image preview")
                 }
             }.onFailure {
-                emitImagePreviewUiState(error = it.message.toString())
+                editImagePreviewUiState(error = it.message.toString())
             }
         }
     }
 
-    private fun emitImagePreviewUiState(
+    private fun editImagePreviewUiState(
         isLoading: Boolean = false,
         bitmap: Bitmap? = null,
         error: String? = null
@@ -55,12 +55,25 @@ class EditImageViewModel(private val editImageRepository: EditImageRepository) :
     fun loadImageFilters(originalImage: Bitmap) {
         Coroutines.io {
             kotlin.runCatching {
-                emitImageFiltersUiState(isLoading = true)
+                editImageFiltersUiState(isLoading = true)
                 editImageRepository.getImageFilters(getPreviewImage(originalImage))
             }.onSuccess { imageFilters ->
-                emitImageFiltersUiState(imageFilters = imageFilters)
+                editImageFiltersUiState(imageFilters = imageFilters)
             }.onFailure {
-                emitImageFiltersUiState(error = it.message.toString())
+                editImageFiltersUiState(error = it.message.toString())
+            }
+        }
+    }
+
+    fun loadImageFiltersBlur(originalImage: Bitmap) {
+        Coroutines.io {
+            kotlin.runCatching {
+                editImageFiltersUiState(isLoading = true)
+                editImageRepository.getImageFiltersBlur(getPreviewImage(originalImage))
+            }.onSuccess { imageFilters ->
+                editImageFiltersUiState(imageFilters = imageFilters)
+            }.onFailure {
+                editImageFiltersUiState(error = it.message.toString())
             }
         }
     }
@@ -73,13 +86,12 @@ class EditImageViewModel(private val editImageRepository: EditImageRepository) :
         }.getOrDefault(originalImage)
     }
 
-    private fun emitImageFiltersUiState(
+    private fun editImageFiltersUiState(
         isLoading: Boolean = false,
         imageFilters: List<ImageFilter>? = null,
         error: String? = null
     ) {
-        val dataState = ImageFiltersDataState(isLoading, imageFilters, error)
-        imageFiltersDataState.postValue(dataState)
+        imageFiltersDataState.postValue(ImageFiltersDataState(isLoading, imageFilters, error))
     }
 
     data class ImageFiltersDataState(

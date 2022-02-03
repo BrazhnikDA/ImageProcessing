@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:scaleType="centerInside"
+
+        android:src="@drawable/prism"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_oval="true"
+        app:riv_border_color="@color/black"
+        app:riv_corner_radius="@dimen/_16sdp"
+        app:riv_mutate_background="true"/>
+
+    <View
+        android:id="@+id/viewSupporter"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
+        app:layout_constraintEnd_toEndOf="@+id/imageProfile"
+        app:layout_constraintStart_toStartOf="@id/imageProfile"
+        app:layout_constraintTop_toTopOf="@+id/imageProfile" />
+
+    <TextView
+        android:id="@+id/menuNameApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/primaryText"
+        android:textSize="@dimen/_13sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/viewSupporter"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="EMAIL_ADDRESS"
+        android:textColor="@color/buttonSavedImages"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/imageProfile"
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

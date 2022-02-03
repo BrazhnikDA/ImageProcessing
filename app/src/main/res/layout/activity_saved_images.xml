@@ -35,6 +35,19 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp" />
 
+        <TextView
+            android:id="@+id/count_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:includeFontPadding="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

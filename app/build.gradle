@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdk 31
 
@@ -37,10 +39,14 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    testImplementation 'junit:junit:4.+'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
@@ -51,6 +57,9 @@ dependencies {
     // Rounded image view
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    // Scalable image view
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+
     // GPU image processing
     implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
 
@@ -58,5 +67,8 @@ dependencies {
     implementation 'org.koin:koin-androidx-viewmodel:2.0.0'
 
     // ViewModel
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
 }
