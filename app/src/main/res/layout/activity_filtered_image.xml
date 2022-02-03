@@ -7,21 +7,22 @@
     android:background="@color/black"
     tools:context=".activities.filteredimage.FilteredImageActivity">
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/imageFilteredImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginRight="@dimen/_25sdp"
-        android:layout_marginBottom="@dimen/_25sdp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/primaryDark"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_share"
@@ -34,12 +35,45 @@
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:src="@drawable/ic_back_original"
+        android:src="@drawable/ic_back"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:tint="@color/white"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSaveImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:layout_marginEnd="@dimen/_22sdp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:includeFontPadding="false"
+        android:text="@string/save_image_gallery"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11ssp"
+        app:backgroundTint="@color/buttonSavedImages"
+        app:cornerRadius="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="29dp" />
+
+    <!--<com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonEditImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:layout_marginEnd="@dimen/_22sdp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:includeFontPadding="false"
+        android:text="@string/edit_image"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11ssp"
+        app:backgroundTint="@color/buttonEditNewImages"
+        app:cornerRadius="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="29dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
