@@ -30,6 +30,8 @@ class SavedImagesViewModel(private val savedImagesRepository: SavedImagesReposit
         }
     }
 
+    fun getCountImage(): Int = savedImagesRepository.getCountImage()
+
     private fun emitSavedImagesUiState(
         isLoading: Boolean = false,
         savedImages: List<Pair<File, Bitmap>>? = null,

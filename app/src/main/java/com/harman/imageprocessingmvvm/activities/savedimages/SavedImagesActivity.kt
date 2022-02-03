@@ -1,5 +1,6 @@
 package com.harman.imageprocessingmvvm.activities.savedimages
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -29,6 +30,7 @@ class SavedImagesActivity : AppCompatActivity(), SavedImageListener {
         viewModel.loadSavedImages()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupObserver() {
         viewModel.savedImagesUiState.observe(this, {
             val savedImagesDataState = it ?: return@observe
@@ -40,6 +42,7 @@ class SavedImagesActivity : AppCompatActivity(), SavedImageListener {
                         this.adapter = adapter
                         visibility = View.VISIBLE
                     }
+                    binding.countImage.text = "Count Images: " + viewModel.getCountImage().toString()
                 }
             } ?: kotlin.run {
                 savedImagesDataState.error?.let { error ->
