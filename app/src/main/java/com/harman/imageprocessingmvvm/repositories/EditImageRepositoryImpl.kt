@@ -420,12 +420,23 @@ class EditImageRepositoryImpl(private val context: Context) : EditImageRepositor
             )
         }
 
-        // Gaussian Blur
-        GPUImageGaussianBlurFilter().also { filter ->
+        // Invert
+        GPUImageColorInvertFilter().also { filter ->
             gpuImage.setFilter(filter)
             imageFilters.add(
                 ImageFilter(
-                    name = "Gauss",
+                    name = "Invert",
+                    filter = filter,
+                    filterPreview = gpuImage.bitmapWithFilterApplied
+                )
+            )
+        }
+
+        GPUImageSoftLightBlendFilter().also { filter ->
+            gpuImage.setFilter(filter)
+            imageFilters.add(
+                ImageFilter(
+                    name = "Soft Light",
                     filter = filter,
                     filterPreview = gpuImage.bitmapWithFilterApplied
                 )
@@ -512,7 +523,7 @@ class EditImageRepositoryImpl(private val context: Context) : EditImageRepositor
                 gpuImage.setFilter(filter)
                 imageFilters.add(
                     ImageFilter(
-                        name = "Zoom Top-Left",
+                        name = "Top-Left",
                         filter = filter,
                         filterPreview = gpuImage.bitmapWithFilterApplied
                     )
@@ -525,7 +536,7 @@ class EditImageRepositoryImpl(private val context: Context) : EditImageRepositor
                 gpuImage.setFilter(filter)
                 imageFilters.add(
                     ImageFilter(
-                        name = "Zoom Top-Right",
+                        name = "Top-Right",
                         filter = filter,
                         filterPreview = gpuImage.bitmapWithFilterApplied
                     )
@@ -538,7 +549,7 @@ class EditImageRepositoryImpl(private val context: Context) : EditImageRepositor
                 gpuImage.setFilter(filter)
                 imageFilters.add(
                     ImageFilter(
-                        name = "Zoom Bottom-Left",
+                        name = "Bottom-Left",
                         filter = filter,
                         filterPreview = gpuImage.bitmapWithFilterApplied
                     )
@@ -551,7 +562,7 @@ class EditImageRepositoryImpl(private val context: Context) : EditImageRepositor
                 gpuImage.setFilter(filter)
                 imageFilters.add(
                     ImageFilter(
-                        name = "Zoom Bottom-Right",
+                        name = "Bottom-Right",
                         filter = filter,
                         filterPreview = gpuImage.bitmapWithFilterApplied
                     )
