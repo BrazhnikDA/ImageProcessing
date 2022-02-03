@@ -8,6 +8,8 @@
     android:animateLayoutChanges="true"
     tools:context=".activities.editimage.EditImageActivity">
 
+    <!--android:background="@color/primaryText"-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,12 +38,12 @@
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:src="@drawable/ic_back_original"
+                android:src="@drawable/ic_back"
                 android:tint="@color/white" />
 
 
             <TextView
-                android:layout_width="137dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
@@ -90,43 +92,52 @@
                     android:id="@+id/buttonFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:shadowRadius="1"
                     android:text="@string/button_filter"
                     android:textColor="@color/white"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"
+                    style="?android:attr/buttonStyle" />
 
                 <Button
                     android:id="@+id/buttonBlur"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="@string/button_blur" />
+                    android:text="@string/button_blur"
+                    style="?android:attr/buttonStyle" />
 
                 <Button
                     android:id="@+id/buttonText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="@string/button_text" />
+                    android:text="@string/button_text"
+                    android:enabled="false"
+                    style="?android:attr/buttonStyle"/>
 
                 <Button
                     android:id="@+id/buttonCut"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:text="@string/button_cut" />
+                    android:text="@string/button_cut"
+                    android:enabled="false"
+                    style="?android:attr/buttonStyle" />
 
                 <Button
                     android:id="@+id/buttonMirror"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_mirror" />
+                    android:text="@string/button_mirror"
+                    android:enabled="false"
+                    style="?android:attr/buttonStyle" />
+
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -136,8 +147,21 @@
             android:layout_height="0dp"
             android:scaleType="centerInside"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/filterRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/layoutHeader" />
+            app:layout_constraintBottom_toTopOf="@id/barrier"
+            app:layout_constraintTop_toBottomOf="@id/layoutHeader"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="550dp"
+            app:layout_constraintBottom_toTopOf="@+id/scroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/navHostFragment"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ProgressBar
             android:id="@+id/previewProgressBar"
@@ -155,10 +179,23 @@
             android:clipToPadding="false"
             android:orientation="horizontal"
             android:paddingStart="0dp"
-            android:paddingLeft="0dp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingEnd="@dimen/_8sdp"
-            android:paddingRight="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/scroll"
+            tools:layout_editor_absoluteX="0dp"
+            tools:listitem="@layout/item_container_filter" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/filterBlurRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_105sdp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="0dp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_8sdp"
             android:paddingBottom="@dimen/_8sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/scroll"
@@ -174,23 +211,6 @@
             app:layout_constraintEnd_toEndOf="@id/filterRecyclerView"
             app:layout_constraintStart_toStartOf="@id/filterRecyclerView"
             app:layout_constraintTop_toTopOf="@id/filterRecyclerView" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/filterBlurRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_105sdp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="0dp"
-            android:paddingLeft="0dp"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_8sdp"
-            android:paddingRight="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/scroll"
-            tools:layout_editor_absoluteX="0dp"
-            tools:listitem="@layout/item_container_filter" />
 
         <ProgressBar
             android:id="@+id/imageFiltersBlurProgressBar"
