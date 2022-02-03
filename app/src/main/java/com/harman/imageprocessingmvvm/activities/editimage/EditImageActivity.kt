@@ -31,8 +31,9 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         const val KEY_FILTERED_IMAGE_URI = "filtered"
     }
 
-    // Name user
-    private var textName: String = ""
+    // User
+    private var userId: String = ""
+    private var userEmail: String = ""
 
     private lateinit var binding: ActivityEditImageBinding
     private val viewModel: EditImageViewModel by viewModel()
@@ -54,14 +55,9 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         binding.filterRecyclerView.visibility = View.GONE
         binding.filterBlurRecyclerView.visibility = View.GONE
 
-        /*// Get name user
-        textName = {
-            (intent.getStringExtra("name")).toString()
-        }.toString()
-
-        // Получить доступ имени в меню
-        val res: Resources = resources
-        String.format(res.getString(com.harman.imageprocessingmvvm.R.string.nameUser), textName)*/
+        // Get user
+        userId = intent.getStringExtra("user_id").toString()
+        userEmail = intent.getStringExtra("email_id").toString()
 
         // Menu
         binding.imageMenu.setOnClickListener {
@@ -110,15 +106,15 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         filteredBitmap.observe(this, { bitmap ->
             binding.imagePreview.setImageBitmap(bitmap)
         })
-        viewModel.saveFilteredImageUiState.observe(this, {
+        /*viewModel.saveFilteredImageUiState.observe(this, {
             val saveFilteredImageDataState = it ?: return@observe
-           /* if (saveFilteredImageDataState.isLoading) {
+           *//* if (saveFilteredImageDataState.isLoading) {
                 binding.imageSave.visibility = View.GONE
                 binding.savingProgressBar.visibility = View.VISIBLE
             } else {
                 binding.savingProgressBar.visibility = View.GONE
                 binding.imageSave.visibility = View.VISIBLE
-            }*/
+            }*//*
             saveFilteredImageDataState.uri?.let { savedImageUri ->
                 Intent(
                     applicationContext,
@@ -132,7 +128,7 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
                     displayToast(error)
                 }
             }
-        })
+        })*/
     }
 
     private fun setupObserversBlur() {
@@ -174,15 +170,15 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             //binding.imagePreview.setImageBitmap(bitmap)
             binding.imagePreview.setImageBitmap(bitmap)
         })
-        viewModel.saveFilteredImageUiState.observe(this, {
+       /* viewModel.saveFilteredImageUiState.observe(this, {
             val saveFilteredImageDataState = it ?: return@observe
-            /*if (saveFilteredImageDataState.isLoading) {
+            *//*if (saveFilteredImageDataState.isLoading) {
                 binding.imageSave.visibility = View.GONE
                 binding.savingProgressBar.visibility = View.VISIBLE
             } else {
                 binding.savingProgressBar.visibility = View.GONE
                 binding.imageSave.visibility = View.VISIBLE
-            }*/
+            }*//*
             saveFilteredImageDataState.uri?.let { savedImageUri ->
                 Intent(
                     applicationContext,
@@ -196,7 +192,7 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
                     displayToast(error)
                 }
             }
-        })
+        })*/
     }
 
     private fun prepareImagePreview() {
@@ -242,12 +238,36 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             }
         }
 
+        viewModel.saveFilteredImageUiState.observe(this, {
+            val saveFilteredImageDataState = it ?: return@observe
+            if (saveFilteredImageDataState.isLoading) {
+            binding.imageSave.visibility = View.GONE
+            binding.savingProgressBar.visibility = View.VISIBLE
+        } else {
+            binding.savingProgressBar.visibility = View.GONE
+            binding.imageSave.visibility = View.VISIBLE
+        }
+        saveFilteredImageDataState.uri?.let { savedImageUri ->
+            Intent(
+                applicationContext,
+                FilteredImageActivity::class.java
+            ).also { filteredImageIntent ->
+                filteredImageIntent.putExtra(KEY_FILTERED_IMAGE_URI, savedImageUri)
+                filteredImageIntent.putExtra("draft", "Draft Saved!")
+                startActivity(filteredImageIntent)
+            }
+        } ?: kotlin.run {
+            saveFilteredImageDataState.error?.let { error ->
+                displayToast(error)
+            }
+        }
+    })
+
         /*
         This will show original image when we long click ImageView until we release click,
         So that we can see difference between original image and filtered image
          */
         binding.imagePreview.setOnLongClickListener {
-            //binding.imagePreview.setImageBitmap(originalBitmap)
             binding.imagePreview.setImageBitmap(originalBitmap)
             return@setOnLongClickListener false
         }
