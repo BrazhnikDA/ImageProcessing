@@ -16,8 +16,9 @@ class MainActivity : AppCompatActivity() {
         const val KEY_IMAGE_URI = "imageUri"
     }
 
-    // Name user
-    private var textName: String = ""
+    // User
+    private var userId: String = ""
+    private var userEmail: String = ""
 
     // Bind the activity screen "activity_main"
     private lateinit var binding: ActivityMainBinding
@@ -27,9 +28,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        textName = {
-            (intent.getStringExtra("name")).toString()
-        }.toString()
+        userId = intent.getStringExtra("user_id").toString()
+        userEmail = intent.getStringExtra("email_id").toString()
 
         setListeners()
     }
@@ -67,7 +67,8 @@ class MainActivity : AppCompatActivity() {
                     EditImageActivity::class.java
                 ).also { editImageIntent ->
                     editImageIntent.putExtra(KEY_IMAGE_URI, imageUri)
-                    editImageIntent.putExtra("name", textName)
+                    editImageIntent.putExtra("user_id", userId)
+                    editImageIntent.putExtra("email_id", userEmail)
                     startActivity(editImageIntent)
                 }
             }
