@@ -3,8 +3,46 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20032894736842105" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/background_button.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_back.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_done.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_launcher_background.xml" value="0.20032894736842105" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_menu_camera.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/ic_share.xml" value="0.23223684210526316" />
         <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/landing_background.xml" value="0.5708333333333333" />
-        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/drawable/side_nav_bar.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout-v23/activity_login.xml" value="0.5546875" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_edit_image.xml" value="0.22" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_filtered_image.xml" value="0.22" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_login.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_main2.xml" value="0.20953947368421053" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_register.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_saved_images.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_send_o_t_p.xml" value="0.22203947368421054" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/activity_verify_o_t_p.xml" value="0.22203947368421054" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/app_bar_main.xml" value="0.20065789473684212" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/content_main.xml" value="0.20953947368421053" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_back.xml" value="0.22203947368421054" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_gallery.xml" value="0.21282894736842106" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_home.xml" value="0.21282894736842106" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_notifications.xml" value="0.22203947368421054" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_profile.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_settings.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/fragment_slideshow.xml" value="0.21282894736842106" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/item_container_filter.xml" value="0.22" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/item_container_saved_image.xml" value="0.22" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/layout_navigation_header.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/layout/nav_header_main.xml" value="0.3503289473684211" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/menu/activity_main_drawer.xml" value="0.3503289473684211" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/menu/main.xml" value="0.3503289473684211" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/menu/menu.xml" value="0.22203947368421054" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/menu/navigation_menu.xml" value="0.22203947368421054" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23223684210526316" />
+        <entry key="..\:/Users/DIMA/AndroidStudioProjects/ImageProcessingMVVM/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.35700325732899024" />
       </map>
     </option>
   </component>

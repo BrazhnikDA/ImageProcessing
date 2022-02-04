@@ -1,4 +1,4 @@
-package com.harman.imageprocessingmvvm
+package com.harman.imageprocessingmvvm.activities.editimage.authorization
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.harman.imageprocessingmvvm.R
 import com.harman.imageprocessingmvvm.activities.main.MainActivity
 import com.harman.imageprocessingmvvm.utilities.displayToast
 

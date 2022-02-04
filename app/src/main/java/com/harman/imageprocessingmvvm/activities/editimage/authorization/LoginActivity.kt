@@ -1,4 +1,4 @@
-package com.harman.imageprocessingmvvm
+package com.harman.imageprocessingmvvm.activities.editimage.authorization
 
 import android.content.Context
 import android.content.Intent
@@ -10,17 +10,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.harman.imageprocessingmvvm.R
 import com.harman.imageprocessingmvvm.activities.main.MainActivity
 import com.harman.imageprocessingmvvm.utilities.displayToast
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
-    private val APP_PREFERENCES_EMAIL = "email"
-    private val APP_PREFERENCES_PASSWORD = "password"
+
+    companion object {
+        const val APP_PREFERENCES_EMAIL = "email"
+        const val APP_PREFERENCES_PASSWORD = "password"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         autoLogin()
@@ -30,13 +31,16 @@ class LoginActivity : AppCompatActivity() {
         setListener()
     }
 
-     fun autoLogin() {
+     private fun autoLogin() {
         prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
 
         if (prefs.contains(APP_PREFERENCES_EMAIL) && prefs.contains(APP_PREFERENCES_PASSWORD)) {
             // Get email, password
             val email: String = prefs.getString(APP_PREFERENCES_EMAIL, "").toString()
             val password: String = prefs.getString(APP_PREFERENCES_PASSWORD, "").toString()
+
+            if(email == "" || password == "")
+                return
 
             // Login
             FirebaseAuth.getInstance()
@@ -80,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 displayToast("You are logged in successfully.")
 
-                                // Запоминаем данные
+                                // Storing data
                                 val editor = prefs.edit()
                                 editor.putString(APP_PREFERENCES_EMAIL, emailString).apply()
                                 editor.putString(APP_PREFERENCES_PASSWORD, passwordString).apply()
