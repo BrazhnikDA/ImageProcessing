@@ -268,10 +268,6 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         }
     }
 
-    private fun setSettings() {
-
-    }
-
     override fun onFilterSelected(imageFilter: ImageFilter) {
         with(imageFilter) {
             with(gpuImage) {
