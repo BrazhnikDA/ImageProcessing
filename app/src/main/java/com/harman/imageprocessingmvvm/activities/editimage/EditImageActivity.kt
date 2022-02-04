@@ -1,17 +1,25 @@
 package com.harman.imageprocessingmvvm.activities.editimage
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.harman.imageprocessingmvvm.R
+import com.harman.imageprocessingmvvm.activities.editimage.authorization.LoginActivity
 import com.harman.imageprocessingmvvm.activities.filteredimage.FilteredImageActivity
 import com.harman.imageprocessingmvvm.activities.main.MainActivity
 import com.harman.imageprocessingmvvm.adapters.ImageFiltersAdapter
@@ -29,11 +37,15 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
 
     companion object {
         const val KEY_FILTERED_IMAGE_URI = "filtered"
+        const val APP_PREFERENCES_EMAIL = "email"
+        const val APP_PREFERENCES_PASSWORD = "password"
     }
 
     // User
     private var userId: String = ""
     private var userEmail: String = ""
+
+    lateinit var prefs: SharedPreferences
 
     private lateinit var binding: ActivityEditImageBinding
     private val viewModel: EditImageViewModel by viewModel()
@@ -47,6 +59,9 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         super.onCreate(savedInstanceState)
         binding = ActivityEditImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+
         setListeners()
         setupObservers()
         setupObserversBlur()
@@ -64,8 +79,14 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
         binding.navigationView.itemIconTintList = null
-        val navController: NavController = Navigation.findNavController(this, com.harman.imageprocessingmvvm.R.id.navHostFragment)
+        val navController: NavController =
+            Navigation.findNavController(this, R.id.navHostFragment)
         NavigationUI.setupWithNavController(binding.navigationView, navController)
+
+        val emailUser: TextView = binding.navigationView
+            .getHeaderView(0)
+            .findViewById(R.id.tv_email)
+        emailUser.text = userEmail
     }
 
     private fun setupObservers() {
@@ -106,29 +127,6 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         filteredBitmap.observe(this, { bitmap ->
             binding.imagePreview.setImageBitmap(bitmap)
         })
-        /*viewModel.saveFilteredImageUiState.observe(this, {
-            val saveFilteredImageDataState = it ?: return@observe
-           *//* if (saveFilteredImageDataState.isLoading) {
-                binding.imageSave.visibility = View.GONE
-                binding.savingProgressBar.visibility = View.VISIBLE
-            } else {
-                binding.savingProgressBar.visibility = View.GONE
-                binding.imageSave.visibility = View.VISIBLE
-            }*//*
-            saveFilteredImageDataState.uri?.let { savedImageUri ->
-                Intent(
-                    applicationContext,
-                    FilteredImageActivity::class.java
-                ).also { filteredImageIntent ->
-                    filteredImageIntent.putExtra(KEY_FILTERED_IMAGE_URI, savedImageUri)
-                    startActivity(filteredImageIntent)
-                }
-            } ?: kotlin.run {
-                saveFilteredImageDataState.error?.let { error ->
-                    displayToast(error)
-                }
-            }
-        })*/
     }
 
     private fun setupObserversBlur() {
@@ -167,32 +165,8 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             }
         })
         filteredBitmap.observe(this, { bitmap ->
-            //binding.imagePreview.setImageBitmap(bitmap)
             binding.imagePreview.setImageBitmap(bitmap)
         })
-       /* viewModel.saveFilteredImageUiState.observe(this, {
-            val saveFilteredImageDataState = it ?: return@observe
-            *//*if (saveFilteredImageDataState.isLoading) {
-                binding.imageSave.visibility = View.GONE
-                binding.savingProgressBar.visibility = View.VISIBLE
-            } else {
-                binding.savingProgressBar.visibility = View.GONE
-                binding.imageSave.visibility = View.VISIBLE
-            }*//*
-            saveFilteredImageDataState.uri?.let { savedImageUri ->
-                Intent(
-                    applicationContext,
-                    FilteredImageActivity::class.java
-                ).also { filteredImageIntent ->
-                    filteredImageIntent.putExtra(KEY_FILTERED_IMAGE_URI, savedImageUri)
-                    startActivity(filteredImageIntent)
-                }
-            } ?: kotlin.run {
-                saveFilteredImageDataState.error?.let { error ->
-                    displayToast(error)
-                }
-            }
-        })*/
     }
 
     private fun prepareImagePreview() {
@@ -225,6 +199,22 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
             }
         }
 
+        val logout: Button = binding.navigationView
+            .getHeaderView(0)
+            .findViewById(R.id.btn_logout)
+
+        logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+
+            val editor = prefs.edit()
+            editor.remove(APP_PREFERENCES_EMAIL).apply()
+            editor.remove(APP_PREFERENCES_PASSWORD).apply()
+
+            displayToast("Logout")
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
         binding.buttonBlur.setOnClickListener {
             if (binding.filterRecyclerView.visibility == View.VISIBLE) {
                 binding.filterRecyclerView.visibility = View.GONE
@@ -241,27 +231,27 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
         viewModel.saveFilteredImageUiState.observe(this, {
             val saveFilteredImageDataState = it ?: return@observe
             if (saveFilteredImageDataState.isLoading) {
-            binding.imageSave.visibility = View.GONE
-            binding.savingProgressBar.visibility = View.VISIBLE
-        } else {
-            binding.savingProgressBar.visibility = View.GONE
-            binding.imageSave.visibility = View.VISIBLE
-        }
-        saveFilteredImageDataState.uri?.let { savedImageUri ->
-            Intent(
-                applicationContext,
-                FilteredImageActivity::class.java
-            ).also { filteredImageIntent ->
-                filteredImageIntent.putExtra(KEY_FILTERED_IMAGE_URI, savedImageUri)
-                filteredImageIntent.putExtra("draft", "Draft Saved!")
-                startActivity(filteredImageIntent)
+                binding.imageSave.visibility = View.GONE
+                binding.savingProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.savingProgressBar.visibility = View.GONE
+                binding.imageSave.visibility = View.VISIBLE
             }
-        } ?: kotlin.run {
-            saveFilteredImageDataState.error?.let { error ->
-                displayToast(error)
+            saveFilteredImageDataState.uri?.let { savedImageUri ->
+                Intent(
+                    applicationContext,
+                    FilteredImageActivity::class.java
+                ).also { filteredImageIntent ->
+                    filteredImageIntent.putExtra(KEY_FILTERED_IMAGE_URI, savedImageUri)
+                    filteredImageIntent.putExtra("draft", "Draft Saved!")
+                    startActivity(filteredImageIntent)
+                }
+            } ?: kotlin.run {
+                saveFilteredImageDataState.error?.let { error ->
+                    displayToast(error)
+                }
             }
-        }
-    })
+        })
 
         /*
         This will show original image when we long click ImageView until we release click,
@@ -276,6 +266,10 @@ class EditImageActivity : AppCompatActivity(), ImageFilterListener {
                 binding.imagePreview.setImageBitmap(value)
             }
         }
+    }
+
+    private fun setSettings() {
+
     }
 
     override fun onFilterSelected(imageFilter: ImageFilter) {
