@@ -10,11 +10,11 @@
         android:name="com.harman.imageprocessingmvvm.activities.editimage.menu.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
+    <!--<fragment
         android:id="@+id/menuNotifications"
         android:name="com.harman.imageprocessingmvvm.activities.editimage.menu.NotificationsFragment"
         android:label="Notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" />-->
     <fragment
         android:id="@+id/menuSettings"
         android:name="com.harman.imageprocessingmvvm.activities.editimage.menu.SettingsFragment"
