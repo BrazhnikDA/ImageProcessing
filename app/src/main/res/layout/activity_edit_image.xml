@@ -30,7 +30,7 @@
                 android:id="@+id/imageMenu"
                 android:layout_width="@dimen/_22sdp"
                 android:layout_height="@dimen/_22sdp"
-                android:src="@drawable/ic_menu_gallery"
+                android:src="@drawable/menu"
                 android:tint="@color/white" />
 
             <androidx.appcompat.widget.AppCompatImageView
